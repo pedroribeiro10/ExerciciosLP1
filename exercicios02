@@ -11,10 +11,10 @@ int main() {
   printf("Escreva outro valor: ");
   scanf("%d",&b);
   if (a>b) {
-  printf("O maior valor é: %d\n", a);
+    printf("O maior valor é: %d\n", a);
   }
   else if (b>a) {
-  printf("O maior valor é: %d\n", b);
+    printf("O maior valor é: %d\n", b);
   }
 return 0;
 }
@@ -27,10 +27,10 @@ void main () {
   scanf("%f", &a);
   b=a*3.17;
   if (a*3.17<=1000) {
-  printf("Bom negócio: %0.2f\n", b);
+    printf("Bom negócio: %0.2f\n", b);
   }
   else {
-  printf("Mau negócio: %0.2f\n", b);;
+    printf("Mau negócio: %0.2f\n", b);;
   }
 }
 
@@ -53,18 +53,43 @@ void main(void) {
 }
 
 //Exercicio 5
+#include <stdio.h>
+int main() {
+    int a, somatorio;
+    somatorio=0;
+    printf("Digite um valor diferente de ZERO: ");
+    scanf("%d",&a);
+    while (a!=0) {
+        somatorio+=a;
+        printf("Digite outro valor diferente de ZERO: ");
+        scanf("%d",&a);
+    }
+    printf("O somatório dos valores é: %d", somatorio);
+return 0;
+}
 
-
-
-
-
-
+//Exercicio 6
+#include <stdio.h>
+int main () {
+  int N,i,somatorio;
+  somatorio=0;
+  printf("Escreva um valor para N: ");
+  scanf("%d", &N);
+  for (i=1;i<=N;i++) {
+      somatorio+=i*i;
+  }
+  printf("O somatório é: %d\n", somatorio);
+return 0;
+}
 
 //Exercicio 7
 #include<stdio.h>
-void main (void){
-int piorTime,melhorTime,codigoTime,i =1,vitorias,derrotas,empates,pontos,maiorPonto=0,menorPonto=999;
-    while (i<=3){
+int main () {
+int codigoTime,melhorTime,piorTime,vitorias,derrotas,empates,pontos,maiorPonto,menorPonto,i;
+  i=1;
+  maiorPonto=0;
+  menorPonto=999;
+  while (i<=20){
     printf("Digite o código do time: ");
     scanf("%d", &codigoTime);
     printf("Digite quantas vitorias: ");
@@ -75,15 +100,39 @@ int piorTime,melhorTime,codigoTime,i =1,vitorias,derrotas,empates,pontos,maiorPo
     scanf("%d", &derrotas);
     pontos = 3*(vitorias)+ empates;
     if(pontos>maiorPonto) {
-    maiorPonto=pontos;
-    melhorTime = codigoTime;
+      maiorPonto=pontos;
+      melhorTime = codigoTime;
     }
     if(pontos<menorPonto) {
-    menorPonto=pontos;
-    piorTime=codigoTime;
+      menorPonto=pontos;
+      piorTime=codigoTime;
     }
     i+=1;
-    }
-    printf("O Melhor time é: %d\n", melhorTime);
-    printf("o Pior time é: %d\n", piorTime);
+  }
+  printf("O Melhor time é: %d\n", melhorTime);
+  printf("o Pior time é: %d\n", piorTime);
+return 0;
 }
+
+//Exercicio 8 em C
+#include <stdio.h>
+int main () {
+  int n1,n2,i;
+  printf("Escreva o número n1: ");
+  scanf("%d", &n1);
+  printf("Escreva o número n2: ");
+  scanf("%d", &n2);
+  i=0;
+  printf("Os números entre n1 e n2 são:\n");
+  for (i=n1+1;i<n2;i++) {
+    printf("%d\n", i);
+  }
+return 0;
+}
+
+//Exercicio 8 em Python
+n1=int(input("Escreva o número n1:"))
+n2=int(input("Escreva o número n2:"))
+print("Os números entre n1 e n2 são:")
+for i in range(n1+1,n2):
+  print(i)
