@@ -1,5 +1,5 @@
 //Exercicio 1
--O que é um tipo de dados?
+-O que é um tipo de dados? 
   Um tipo de dados é uma classificação de um dado de um programa, o qual pode ser guardado em uma variável e esse tipo define o que pode ser feito com aquele valor. 
   Exemplos: Inteiros (int), Reais (float), Texto (string), etc.
 
