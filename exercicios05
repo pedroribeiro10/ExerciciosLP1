@@ -1,0 +1,84 @@
+//Exercício 1
+
+#include <stdio.h>
+void main () {
+    int a,b;
+    int* p;
+    printf("Escreva o valor de a: ");
+    scanf("%d",&a);
+    printf("Escreva o valor de b: ");
+    scanf("%d",&b);
+    printf("Valor inicial de a: %d\n",a);
+    printf("Valor inicial de b: %d\n",b);
+    if (a>b) {
+        p=&a;
+    } 
+    else {
+        p=&b;
+    }
+    *p=*p-50;
+    printf("Valor final de a: %d\n",a);
+    printf("Valor final de b: %d\n",b);
+}
+
+//Exercício 2
+
+#include <stdio.h>
+void compra(int* conta, int valor) {
+    *conta= *conta-valor;
+}
+void main () {
+    int contal, conta2, valor_compra=500;
+    printf("Escreva o saldo da conta 1: ");
+    scanf("%d", &contal);
+    printf("Escreva o saldo da conta 2: ");
+    scanf("%d", &conta2);
+    if (contal>conta2) {
+        compra(&contal,valor_compra);
+    } else {
+        compra(&conta2,valor_compra);
+    }
+printf("Saldo final da conta 1: %d\n", contal);
+printf("Saldo final da conta 2: %d\n", conta2);
+}
+
+//Exercício 3
+
+#include <stdio.h>
+void compra(int* conta, int valor) {
+    *conta= *conta - valor;
+}
+void main () {
+    int compras[] = { 100, 50, 80, 30, 20 };
+    int contal, conta2, i, valor_das_compras;
+    printf("Escreva o saldo da conta 1: ");
+    scanf("%d", &contal);
+    printf("Escreva o saldo da conta 2: ");
+    scanf("%d", &conta2);
+    for (i=0;i<5;i++) {
+        valor_das_compras=compras[i];
+        if (contal>conta2) {
+            compra(&contal, valor_das_compras);
+        } else {
+            compra(&conta2,valor_das_compras);
+        }
+    }
+printf("Saldo da conta 1 depois da compra %d: %d\n", i+1, contal);
+printf("Saldo da conta 2 depois da compra %d: %d\n", i+1, conta2);
+}
+
+
+//Exercício 4
+
+#include <stdio.h>
+void troca(int *p1, int *p2) {
+    int A= *p1;
+    *p1= *p2;
+    *p2= A;
+}
+int main() {
+    int x=10, y=20;
+    troca(&x,&y);
+    printf("%d %d\n", x, y);
+return 0;
+}
