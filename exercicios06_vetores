@@ -1,0 +1,76 @@
+//Exercício 1
+
+#include <stdio.h>
+void preenche(int* xs, int n) {
+    for (int i=0;i<n;i++) {
+        printf("Escreva o valor %d do vetor: ", i+1);
+        scanf("%d", xs+i);
+    }
+}
+float media(int* xs, int n) {
+    float soma=0;float media;
+    for (int i=0;i<n;i++) {
+        soma+=*(xs+i);
+    }
+    media=soma/n;
+return media;
+}
+int main() {
+    int n, vec[100];
+    printf("Escreva um número N (tamanho do vetor, no máximo 100): ");
+    scanf("%d", &n);
+    if (n<1 || n>100) {
+        printf("Número inválido, máximo 100");
+        return 1;
+    }
+    preenche(vec,n);
+    float resultado = media(vec,n);
+    printf("A média dos valores do vetor é: %.2f: ", resultado);
+return 0;
+}
+
+//Exercício 2
+
+#include <stdio.h> 
+int main () {
+    int vet[5];
+    for (int i=0;i<5;i++) {
+        printf("Escreva o valor %d do vetor: ", i+1);
+        scanf("%d", &vet[i]);
+    }
+    printf("Vetor vet: ");
+    for (int j=0;j<5;j++) {
+        printf("%d ", vet[j]);
+    }
+    printf("\n");
+    int I;
+    printf("Escreva um valor de I (0-4) para remover do vetor: ");
+    scanf("%d", &I);
+    for (int k=I;k<5;k++) {
+        vet[k]=vet[k+1];
+    }
+    printf("Vetor vet: ");
+    for (int j=0;j<5;j++) {
+        printf("%d ", vet[j]);
+    }
+    vet[4]=0;
+    return 0;
+}
+
+//Exercício 3
+
+#include <stdio.h>
+void medias(int vs[12]) {
+    for (int i=0;i<6;i++) {
+        vs[i]= (vs[2*i]+vs[2*i+1])/2;
+    }
+}
+int main() {
+    int notas[12]= { 70,40,50,70,80,30,60,60,90,50,70,60 };
+    medias(notas);
+    printf("Médias bimestrais: ");
+    for (int i=0;i<6;i++) {
+        printf("%d ", notas[i]);
+    }
+return 0;
+}
