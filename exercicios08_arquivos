@@ -9,7 +9,7 @@ int main () {
     int i;
     
     printf("Escreva uma string (max 25 caracteres): ");
-    scanf("%25s", str);
+    scanf(" %25[^\n]", str);
     
     arquivo = fopen("saida.txt", "w");
     if (arquivo == NULL) {
@@ -102,4 +102,76 @@ int main () {
 
 
 //Exercício 5
+
+-Alteração do exercício 1 (com a função):
+#include <stdio.h>
+#include <string.h>
+
+void escreva_string (FILE* f, char* str) {	
+	int i=0;
+	
+	while (str[i] != '\0') {
+		fputc(str[i], f);
+		i++;
+	}
+}
+
+int main () {
+	char texto[26];
+	FILE* arquivo5;
+	int i;
+	
+	printf("Escreva uma string (max 25 caracteres): ");
+	scanf(" %25[^\n]", &texto);
+	
+	arquivo5 = fopen("saida2.txt" , "w");
+	
+	escreva_string(arquivo5, texto);
+	
+	fclose(arquivo5);
+	return 0;
+}
+
+-Alteração do exercício 4 (com a função):
+
+#include <stdio.h>
+#include <string.h>
+
+void escreva_string (FILE* f, char* str) {	
+	int i=0;
+	
+	while (str[i] != '\0') {
+		fputc(str[i], f);
+		i++;
+	}
+}
+
+int main () {
+	char texto[10][26];
+	FILE* arquivo;
+	char nome_arquivo[20];
+	int i,j;
+	
+	for (i=0; i<10; i++) {
+		printf("Escreva a string %d: ", i+1);
+		scanf(" %25[^\n]", texto[i]);
+	}
+	for (i=0; i<10; i++) {
+		sprintf(nome_arquivo, "saida5.%d.txt", i+1);
+		
+		arquivo = fopen(nome_arquivo, "w");
+		
+		if (arquivo == NULL) {
+			printf("Erro ao criar o arquivo %s\n", nome_arquivo);
+			return 1;
+		}
+			
+		escreva_string (arquivo, texto[i]);
+		
+		fclose(arquivo);
+	}
+	return 0;
+}
+
+//Exercicio 6
 
