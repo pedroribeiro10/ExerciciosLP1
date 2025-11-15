@@ -2,61 +2,32 @@
 
 #include <stdio.h>
 #include <string.h>
-
-int main () {
-    char str[26];
-    FILE* arquivo;
-    int i;
-    
-    printf("Escreva uma string (max 25 caracteres): ");
-    scanf(" %25[^\n]", str);
-    
-    arquivo = fopen("saida.txt", "w");
-    if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo!\n");
-        return 1;
-    }
-    for (i=0 ; i < strlen(str) ; i++) {
-        fputc(str[i], arquivo);
-    }
-    
-    fclose(arquivo);
-    printf("Arquivo escrito com sucesso!\n");
-
-    
-    return 0;
-}
-
-
-//Exercício 2
-
-#include <stdio.h>
-#include <string.h>
-
-int main () {
+ 
+void main () {
+	int i;
+	char frase[26];
+	printf("Escreva uma string: ");
+	scanf(" %25[^\n]", &frase);
 	FILE* arquivo;
-	char texto[26];
-	char c;
-	int i=0;
-	
-	arquivo = fopen("saida.txt", "r");
-	if (arquivo == NULL) {
-		printf("Erro ao abrir o arquivo!\n");
-		return 1;
+	arquivo = fopen("teste.txt", "w");
+	for (i=0; i<strlen(frase); i++) {
+		fputc(frase[i] , arquivo);
 	}
-	
-	while ((c = fgetc(arquivo)) != EOF && i<25) {
-		texto[i] = c;
-		i++;
-	} 
-	
-	texto[i] = '\0';
 	fclose(arquivo);
-	
-	printf("String lida do arquivo: %s\n", texto);
-	
-	return 0;
 }
+
+//Exercício 2 (SOMENTE O QUE FOI ADICIONADO AO PRIMEIRO EXERCICIO)
+
+arquivo = fopen("teste.txt", "r");
+	char novo[26];
+	for (i=0; i<strlen(frase);i++) {
+		novo[i]=fgetc(arquivo);
+	}
+	novo[i]='\0';
+	fclose(arquivo);
+	printf("A nova string é: %s", novo);
+}
+
 
 //Exercício 3
 
@@ -65,113 +36,90 @@ Ao ler: Deve adicionar o '\0' manualmente para indicar o fim da string.
 
 //Exercício 4
 
-
 #include <stdio.h>
 #include <string.h>
 
-int main () {
-	char textos[10][26];
-	int i,j;
-	FILE* arquivo;
-	char nome_arquivo[20];
-	
-	for (i=0; i<10; i++) {
-		printf("Escreva a frase %d: ", i+1);
-		scanf(" %25[^\n]", textos[i]);	
+void main () {
+	char frases[5][26];
+	int i , j;
+	FILE* arq;
+	char nomeArquivo[20];
+	for (i=0;i<5;i++) {
+		printf("Escreva a string %d: ", i+1);
+		scanf(" %25[^\n]", frases[i]);
+		while (getchar() != '\n');
 	}
-	
-	for (i=0; i<10; i++) {
-		sprintf(nome_arquivo, "string%d.txt", i+1);
-		
-		arquivo = fopen(nome_arquivo, "w");
-		
-		if (arquivo == NULL) {
-			printf("Erro ao criar o arquivo %s\n", nome_arquivo);
-			return 1;
+	for (i=0;i<5;i++) {
+		sprintf(nomeArquivo,"testando%d.txt", i+1);
+		arq = fopen(nomeArquivo, "w");
+		for (j=0;j<strlen(frases[i]);j++) {
+			fputc(frases[i][j], arq);
 		}
-		
-		for (j=0; j < strlen(textos[i]); j++) {
-			fputc(textos[i][j], arquivo);
-		}
-		
-		fclose(arquivo);
-		printf("Frase %d gravada em %s\n",i+1, nome_arquivo);
 	}
-	return 0;
+	fclose(arq);
+	printf("Código executado com sucesso!\n");
 }
+
 
 
 //Exercício 5
 
 -Alteração do exercício 1 (com a função):
+
 #include <stdio.h>
 #include <string.h>
 
-void escreva_string (FILE* f, char* str) {	
-	int i=0;
-	
-	while (str[i] != '\0') {
-		fputc(str[i], f);
-		i++;
+void escreva_string(FILE* f, char* str) {
+	int i;
+	for (i=0; i<strlen(str); i++) {
+		fputc(str[i] , f);
 	}
+	fclose(f);
 }
 
-int main () {
+void main () {
+	FILE* arquivo;
 	char texto[26];
-	FILE* arquivo5;
-	int i;
-	
-	printf("Escreva uma string (max 25 caracteres): ");
-	scanf(" %25[^\n]", &texto);
-	
-	arquivo5 = fopen("saida2.txt" , "w");
-	
-	escreva_string(arquivo5, texto);
-	
-	fclose(arquivo5);
-	return 0;
+	arquivo = fopen("arquivoFunçao.txt", "w");
+	printf("Esreva uma frase: ");
+	scanf(" %25[^\n]", texto);
+	escreva_string(arquivo, texto);
+	printf("Programa concluído com sucesso!");
 }
+
 
 -Alteração do exercício 4 (com a função):
 
 #include <stdio.h>
 #include <string.h>
 
-void escreva_string (FILE* f, char* str) {	
-	int i=0;
-	
-	while (str[i] != '\0') {
-		fputc(str[i], f);
-		i++;
+void escreva_string(FILE* f, char str[][26]) {
+	int i,j;
+	char nome_arquivo[20];
+	for (i=0; i<5;i++) {
+		sprintf(nome_arquivo, "string%d.txt", i+1);
+		f = fopen(nome_arquivo, "w");
+		for (j=0;j<strlen(str[i]); j++) {
+			fputc(str[i][j], f);
+		}
+		fclose(f);
 	}
 }
 
-int main () {
-	char texto[10][26];
+void main () {
 	FILE* arquivo;
-	char nome_arquivo[20];
-	int i,j;
-	
-	for (i=0; i<10; i++) {
-		printf("Escreva a string %d: ", i+1);
-		scanf(" %25[^\n]", texto[i]);
+	char textos[5][26];
+	for (int i=0; i<5; i++) {
+		printf("Escreva a frase %d: ", i+1);
+		scanf(" %25[^\n]", textos[i]);
+		while (getchar() != '\n');
 	}
-	for (i=0; i<10; i++) {
-		sprintf(nome_arquivo, "saida5.%d.txt", i+1);
-		
-		arquivo = fopen(nome_arquivo, "w");
-		
-		if (arquivo == NULL) {
-			printf("Erro ao criar o arquivo %s\n", nome_arquivo);
-			return 1;
-		}
-			
-		escreva_string (arquivo, texto[i]);
-		
-		fclose(arquivo);
-	}
-	return 0;
+	escreva_string(arquivo, textos);
 }
 
 //Exercicio 6
+
+-Não houve nenhuma mudança no comportamento pois estou usando apenas texto sem estruturas e outros fatores que interfiram diretamente.
+
+
 
